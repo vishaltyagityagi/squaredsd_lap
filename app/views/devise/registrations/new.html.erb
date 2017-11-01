@@ -1,0 +1,99 @@
+<h2>Sign up</h2>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email ,"Email or Username" %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :secret_code %><br />
+    <%= f.text_field :secret_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+
+<script>
+$(document).ready(function() { 
+$(".new_user").validate({ 
+  rules: { 
+    "user[email]": { 
+      required: true, 
+      email: true, 
+      emailz:{required:true} 
+    }, 
+    "user[first_name]": { 
+      required: true, 
+    }, 
+    "user[last_name]": { 
+      required: true, 
+    }, 
+    "user[secret_code]": { 
+      required: true,
+      minlength: 6
+    }, 
+    "user[password]": { 
+      required: true, 
+    }, 
+    "user[password_confirmation]": { 
+      required: true, 
+      equalTo: '#user_password' 
+    } 
+  }, 
+  messages: { 
+    "user[email]": { 
+      required: "Please enter Email.", 
+    }, 
+    "user[first_name]": { 
+      required: "Please enter first_name.", 
+    }, 
+    "user[last_name]": { 
+      required: "Please upload  Last_name", 
+    }, 
+    "user[secret_code]": { 
+      required: "Please enter secret_code.", 
+    }, 
+    "user[password]": { 
+      required: "Please enter Password.", 
+
+    }, 
+    "user[password_confirmation]": { 
+      required: "Please Re-enter Password.", 
+        equalTo: 'confirm should be equal' 
+    } 
+  } 
+}); 
+  $.validator.addMethod("emailz", function(value, element) { 
+      return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i.test(value); 
+  }, "Please enter a valid Email. ie... mrbrown@xyz.com"); 
+}); 
+</script>
