@@ -1,0 +1,22 @@
+= flash_messages
+%p#notice= notice
+%h1 Listing Secretcodes
+%table
+  %thead
+    %tr
+      %th Indexing &nbsp &nbsp &nbsp &nbsp;
+      %th Email &nbsp &nbsp &nbsp &nbsp;
+      %th Secretcode &nbsp &nbsp &nbsp &nbsp;
+      %th Actions
+      %th{:colspan => "3"}
+  %tbody
+    - @secretcodes.each.with_index(1) do |secretcode,index|
+      %tr
+        %td= index
+        %td= secretcode.user.try(:email)
+        %td= secretcode.SecretCode
+        %td= link_to 'Show', secretcode
+        %td= link_to 'Edit', edit_secretcode_path(secretcode)
+        %td= link_to 'Destroy', secretcode, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Secretcode', new_secretcode_path

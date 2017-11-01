@@ -48,5 +48,8 @@ group :development do
   gem 'devise'
 	gem 'cancancan', '~> 1.10'
 	gem 'rolify'
+	gem "twitter-bootstrap-rails"
+	gem 'haml'
+
 end
 

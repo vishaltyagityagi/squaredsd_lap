@@ -1,0 +1,28 @@
+%b{:style => "color: green;"}
+  Create Secret Code for  #{current_user.username}
+= form_for(@secretcode) do |f|
+  - if @secretcode.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@secretcode.errors.count, "error")
+        prohibited this secretcode from being saved:
+      %ul
+        - @secretcode.errors.full_messages.each do |message|
+          %li= message
+  .actions
+    = f.submit
+%b{:style => "color: red;"} OR
+%br/
+%b{:style => "color: green;"} Create Secret Code without User
+= form_for @secretcode, url: create_many_secret_path do |f|
+  - if @secretcode.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@secretcode.errors.count, "error")
+        prohibited this secretcode from being saved:
+      %ul
+        - @secretcode.errors.full_messages.each do |message|
+          %li= message
+  = f.select :number, (0..100).step(10).to_a, selected: "10"
+  .actions
+    = f.submit 'Create multiple secret'
